@@ -1,0 +1,58 @@
+ruta  <script src="/Scripts/app-landing/landing.js"></script> 
+
+$('#datetimepicker').datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            autoclose: true,
+        startDate: '+3d',
+        endDate: sumarDias(new Date(), 30),
+    });
+
+    //Obtiene la fecha actual y suma los dias 
+    function sumarDias(fecha, dias) {
+        fecha.setDate(fecha.getDate() + dias);
+        return fecha;
+    }
+    //function hoyFecha() {
+    //    var hoy = new Date();
+    //    var dd = hoy.getDate();
+    //    var mm = hoy.getMonth() + 1;
+    //    var yyyy = hoy.getFullYear();
+
+    //    dd = addZero(dd);
+    //    mm = addZero(mm);
+
+    //    return dd + '/' + mm + '/' + yyyy;
+    //}
+
+    //function addZero(i) {
+    //    if (i < 10) {
+    //        i = '0' + i;
+    //    }
+    //    return i;
+    //}
+
+//css
+.btn-u{
+    font-size:16px;
+}
+
+//ruta  <link rel="stylesheet" href="/Content/fletes/pages/page_log_reg_v4.css">
+
+/*Form control*/
+.form-control {
+    font-size: 16px;
+}
+
+
+/* Registration form */
+.reg-block {
+    //background-size: 50%;
+    background-size: 50%;
+    transform: scale(1,0.73);
+    height: 50px;
+    margin: 0% 0% 10%;
+    margin-top: 0%;
+}
+
+
