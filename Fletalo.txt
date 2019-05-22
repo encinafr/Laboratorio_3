@@ -56,3 +56,236 @@ $('#datetimepicker').datepicker({
 }
 
 
+        $(function () {
+
+
+         
+            $(document).ready(function () {
+                addCss("#Name");
+                addCss("#Email");
+                addCss("#From");
+                addCss("#To");
+                addCss("#Stuff");
+               
+            });
+
+
+            function tieneTexto(selector) {
+                if($(selector).val().length < 1) {
+                    addCss("#Name");
+                    addCss("#Email");
+                    addCss("#From");
+                    addCss("#To");
+                    addCss("#Stuff");
+                }
+
+               // return false;
+            }
+
+            function escrituraInput(selector) {
+                $(selector).on('keyup', function () {
+                    $(selector).css("background-color", "white", "border", "none", "color", "white");
+                    return true;
+                });
+               
+                return false;
+            }
+            escrituraInput("#Name");
+            escrituraInput("#Email");
+            escrituraInput("#From");
+            escrituraInput("#To");
+            escrituraInput("#Stuff");
+
+            tieneTexto("#Name");
+            tieneTexto("#Email");
+            tieneTexto("#From");
+            tieneTexto("#To");
+            tieneTexto("#Stuff");
+
+            function campoVacio(campo) {
+                if (campo == "") {
+                    return true;
+                }
+                return false;
+            }
+            function MostrarMensajeError() {
+                $("#DataMessageError").removeClass("hidden").delay(3000).fadeOut("fast");
+            }
+                
+            function addCss(selector) {
+                $(selector).css("background-color", "rgb(251, 227, 228)", "border", "1px solid #fbc2c4", "color", "#8a1f11");
+            }
+
+            function validar(data) {
+                /* Revisar codigo */
+                var emailPattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+
+                
+                if (campoVacio(data.name)) {
+                    addCss("#Name");  
+                    $("#campoObligatorioName").removeClass("hidecampoObligatorio");
+                    MostrarMensajeError();
+                } else {
+                    $("#campoObligatorioName").addClass("hidecampoObligatorio");
+                }
+                //enail
+                if (data.email == "") {
+                    addCss("#Email");
+                    $("#campoObligatorioEmail").removeClass("hidecampoObligatorio");
+                    MostrarMensajeError();
+                   
+                } else if (!emailPattern.test(data.email)) {
+                    $("#EmailFormatValidation").show().delay(4000).fadeOut("fast");
+                    addCss("#Email");
+                } else if (emailPattern.test(data.email)) {
+                    $("#EmailFormatValidation").hide();
+                }else {
+                    $("#campoObligatorioEmail").addClass("hidecampoObligatorio");
+                }
+
+                //origen
+                if (data.from == "") {
+                    addCss("#From");
+                    $("#campoObligatorioFrom").removeClass("hidecampoObligatorio");
+                    MostrarMensajeError();
+                } else {
+                    $("#campoObligatorioFrom").addClass("hidecampoObligatorio");
+                }
+
+                //Destino
+                if (data.to == "") {
+                    addCss("#To");
+                    $("#campoObligatorioTo").removeClass("hidecampoObligatorio");
+                   
+                    MostrarMensajeError();
+                } else {
+                    $("#campoObligatorioTo").addClass("hidecampoObligatorio");
+                }
+                // cosas a enviar
+                if (data.thing == "") {
+                    addCss("#Stuff");
+                    $("#campoObligatorioStuff").removeClass("hidecampoObligatorio");
+                    MostrarMensajeError();
+                } else {
+                    $("#campoObligatorioStuff").addClass("hidecampoObligatorio");
+                }
+
+                //// email
+                //if (data.email == "") {
+                //    //$("#EmailValidation").show();
+                //} else {
+                   // $("#EmailValidation").hide();
+                   
+                //}
+
+                //// origen
+                //if (data.from == "")
+                //    $("#OrigenValidation").show();
+                //else
+                //    $("#OrigenValidation").hide();
+
+                //// destino
+                //if (data.to == "")
+                //    $("#DestinoValidation").show();
+                //else
+                //    $("#DestinoValidation").hide();
+
+                //// cosas a enviar
+                //if (data.thing == "")
+                //    $("#StuffValidation").show();
+                //else
+                //    $("#StuffValidation").hide();
+
+                if (data.thing == "" || data.to == "" || data.from == "" || data.email == "" || data.name == "" ) {
+                    moveToTopPage();
+                    MostrarMensajeError();
+                    return false;
+                }
+
+                return true;
+            }
+
+          
+
+            function moveToTopPage() {
+                $('html, body').animate({
+                    scrollTop: $("body").offset().top
+                }, 1000);
+            }
+            
+            function hiddenMsg() {
+                $("#sendContactoCotizacionMessageError").addClass("hidden");
+                $("#sendContactoCotizacionMessageOk").addClass("hidden");
+            }
+
+            function cleanForm(selector){
+                $(selector).val('');   
+            }
+
+            var sendFunctions = (function () {
+                var sendContactoCotizacion = function () {
+                    var apiUrl = window.WebGeneralOptions.apiBaseUrl;
+
+                    var data = {
+                        name: $("#Name").val().trim(),
+                        email: $("#Email").val().trim(),
+                        from: $("#From").val().trim(),
+                        to: $("#To").val().trim(),
+                        thing: $("#Stuff").val().trim(),
+                        date: new Date()
+                    };
+
+
+                    if (validar(data)) {
+
+                        $.post(apiUrl + "/contactos/cotizar_flete", data)
+                            .done(function (result) {
+
+                                if (result === true) {
+                                    $("#sendContactoCotizacionMessageError").addClass("hidden");
+                                    $("#sendContactoCotizacionMessageOk").removeClass("hidden");
+                                    cleanForm("#Email");
+                                    cleanForm("#From");
+                                    cleanForm("#To");
+                                    cleanForm("#Name");
+                                    cleanForm("#Stuff");
+                                    addCss("#Name");
+                                    addCss("#Email");
+                                    addCss("#From");
+                                    addCss("#To");
+                                    addCss("#Stuff");
+                                    window.setInterval(hiddenMsg, 7000);
+                                }
+                                else if (result === false) {
+                                    $("#sendContactoCotizacionMessageError").removeClass("hidden");
+                                    $("#sendContactoCotizacionMessageOk").addClass("hidden");
+                                }
+                            })
+                            .fail(function () {
+                                $("#sendContactoCotizacionMessageError").removeClass("hidden");
+                                $("#sendContactoCotizacionMessageOk").addClass("hidden");
+                            })
+                            .always(function () {
+                                moveToTopPage();
+                            });
+                    } else {
+                        MostrarMensajeError();
+                        
+                       // $("#sendContactoCotizacionMessageOk").addClass("hidden");
+                    }
+                };
+
+                return {
+                    sendContactoCotizacion: sendContactoCotizacion
+                };
+            })();
+
+            $("#sendContactoCotizacion").click(sendFunctions.sendContactoCotizacion);
+            
+            window.sendFunctions = sendFunctions;
+
+
+        });
+    </script>
+</body>
+</html>
